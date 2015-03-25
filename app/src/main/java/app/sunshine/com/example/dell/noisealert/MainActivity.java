@@ -1,8 +1,8 @@
 package app.sunshine.com.example.dell.noisealert;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 public class MainActivity extends ActionBarActivity {
 
     public static final String EXTRA_MESSAGE = "app.sunshine.com.example.dell.noiseAlert.Message";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +43,21 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void sendMessage(View view){
+    public void sendMessage(View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText)findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        EditText editText = (EditText) findViewById(R.id.edit_message);
+
+        if (editText != null) {
+            String messageString = editText.getText().toString();
+            if (!messageString.isEmpty()) {
+
+                intent.putExtra(EXTRA_MESSAGE, messageString);
+                startActivity(intent);
+            }
+            editText.setText("");
+        }
     }
-}
+
+    }
+
+
